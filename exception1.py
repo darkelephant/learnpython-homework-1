@@ -10,7 +10,7 @@
     
 """
 
-dict_faq = {"Как дела": "Хорошо!",
+faq = {"Как дела": "Хорошо!",
         "Что делаешь?": "Программирую",
                   "ЯП": "PYTHON!",
              "Ты кто?": "Skynet",
@@ -19,7 +19,7 @@ dict_faq = {"Как дела": "Хорошо!",
         }
 
 def ask_user_dict(quest):
-    return dict_faq.get(quest, None)
+    return faq.get(quest, None)
 
 
 def ask_user():

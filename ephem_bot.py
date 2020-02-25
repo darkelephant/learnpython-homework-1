@@ -23,6 +23,17 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log'
 )
 
+PLANETS = {'Mercury':ephem.Mercury, 
+             'Venus':ephem.Venus, 
+              'Mars':ephem.Mars, 
+           'Jupiter':ephem.Jupiter, 
+            'Saturn':ephem.Saturn, 
+            'Uranus':ephem.Uranus, 
+           'Neptune':ephem.Neptune, 
+             'Pluto':ephem.Pluto, 
+               'Sun':ephem.Sun, 
+              'Moon':ephem.Moon, }
+
 def greet_user(bot, update):
     text = 'Вызван /start'
     update.message.reply_text(text)
@@ -31,10 +42,10 @@ def greet_user(bot, update):
 def get_planet(bot, update):
     answer = 'Не знаю такую планету'
     today = datetime.datetime.now().strftime('%Y/%d/%m')
-    planet = update.message.text.split()
-    if len(planet) > 1 and planet[1].lower() == 'mars':
-        mars = ephem.Mars(today)
-        update.message.reply_text('{} :: {}'.format(today, ephem.constellation(mars)))
+    planet_name = update.message.text.split()
+    if len(planet_name) > 1 and planet_name[1].capitalize() in PLANETS:
+        planet = PLANETS[planet_name[1].capitalize()](today)
+        update.message.reply_text('{} :: {}'.format(today, ephem.constellation(planet)))
     else:
         update.message.reply_text(answer)
 
